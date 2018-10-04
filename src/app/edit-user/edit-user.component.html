@@ -1,0 +1,92 @@
+<!-- <form>
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" class="form-control" [(ngModel)]="ip_sel_user.user_name" name="user_name"/>
+    </div>
+    <div class="form-group" >
+        <label>Age:</label>
+        <input type="text" class="form-control" [(ngModel)]="ip_sel_user.user_age" name="user_age"/>
+    </div>
+    <button class="btn btn-info" (click)="updateUsers()">Update</button>
+  </form> -->
+
+  <!-- <div *ngIf="ip_sel_user" class="form-group">
+    <hr>
+      <p>{{ip_sel_user.name}}'s Details</p>
+      <label> Id :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ip_sel_user.id}}</label><br>
+      <label> Name: <input type="textbox" class="form-control" [(ngModel)]="ip_sel_user.name"/></label><br>
+      <label> Mobile Number: <input type="textbox" class="form-control" [(ngModel)]="ip_sel_user.mobile_no"/></label><br>
+      <label> Email Id: <input type="textbox" class="form-control" [(ngModel)]="ip_sel_user.email"/></label><br><br>
+      <button class="btn btn-info" (click)="goBack()">Go back</button><br><br>
+      <button class="btn btn-info" (click)=updateUser()>Update User Detail</button>
+  </div> -->
+
+<!doctype html>
+<div *ngIf="ip_sel_user" class="form-group">
+<p>User Details</p>
+<form content-type="appilic" #userForm="ngForm">
+  
+    <div [hidden]="userForm.submitted">
+        <div class="cross-validation" 
+        [class.cross-validation-error]="userForm.errors?.identityRevealed && 
+        (userForm.touched || userForm.dirty)">
+  
+          <div class="form-group">
+            <label>Name:</label>
+            <input type="text" required minlength="4"
+            class="form-control" [(ngModel)]="ip_sel_user.name" name="name" #name="ngModel" style="width: 40%"/>
+            
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+              <div *ngIf="name.errors.required">
+                Name is required.
+              </div>
+              <div *ngIf="name.errors.minlength">
+                Name must be at least 4 characters long.
+              </div>
+            </div>
+          </div>
+  
+          <div class="form-group">
+              <label>Mobile Number:</label>
+              <input type="text" class="form-control" [(ngModel)]="ip_sel_user.mobile" #mobile="ngModel" name="mobile" style="width: 40%" 
+              (keypress)="keyPress($event)" minlength=10 maxlength=10 required/>
+              
+              <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="alert alert-danger">
+            
+                <div *ngIf="mobile.errors.required">
+                  mobile number is required.
+                </div>
+                <div *ngIf="mobile.errors.minlength">
+                    mobile number must be at least 10 characters long.
+                </div>
+                <div *ngIf="alnum_pressed">
+                    mobile number must be numeric.
+                </div>
+              </div>    
+          </div>
+  
+          <div class="form-group">
+            <label>Email Address:</label>
+            <input type="email"
+            class="form-control" [(ngModel)]="ip_sel_user.email" #email="ngModel" name="email" style="width: 40%" required email/>
+  
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+  
+              <div *ngIf="email.errors.required">
+                email is required.
+              </div>
+              <div *ngIf="email.errors.email"> 
+                  Primary Email not valid.
+              </div>
+            </div>
+          </div>
+          
+          <button class="btn btn-info" (click)="goBack()">Go back</button><br><br>
+          <button class="btn btn-info" (click)=updateUser()>Update User Detail</button>
+        </div>
+    </div>
+  </form>
+  
+</div>
+
+  
