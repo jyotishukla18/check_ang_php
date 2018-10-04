@@ -8,7 +8,7 @@ import {Location} from '@angular/common';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: []
 })
 export class EditUserComponent implements OnInit {
 
